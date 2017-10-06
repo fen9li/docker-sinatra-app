@@ -1,5 +1,5 @@
 #!/bin/bash
-source buildDockerImage.conf
+source spinup.conf
 appRepoName=`echo "$appRepo" | cut -d'/' -f 5 | cut -d'.' -f 1`
 dockerImageName="local/$appRepoName"
 
