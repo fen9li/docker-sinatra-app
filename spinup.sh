@@ -21,6 +21,7 @@ if [ ! -e "Gemfile.lock"]
   exit 1
 fi
 
+echo `pwd`
 # build docker image
 docker build -t "$dockerImageName" .
 
