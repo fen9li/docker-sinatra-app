@@ -1,29 +1,38 @@
 #!/bin/bash
 source buildDockerImage.conf
+appRepoName=`echo "$appRepo" | cut -d'/' -f 5 | cut -d'.' -f 1`
+dockerImageName="local/$appRepoName"
+
+# delete possible legacy docker image
+docker rmi "$dockerImageName" 2>/dev/null
 
 # change to workingDir and git clone simple-sintra-app
-cd $workingDir
+cd docker-sinatra-app
 git clone -b $appRepoBranch $appRepo
 
 # copy Dockerfile next to app Gemfile
-appRepoName=`echo "$appRepo" | cut -d'/' -f 5 | cut -d'.' -f 1`
 \cp Dockerfile "./$appRepoName"
 
 # generate Gemfile.lock
 cd "$appRepoName"
 docker run --rm -v "$PWD":/usr/src/app -w /usr/src/app ruby:2.4 bundle install
 
-if [-e "Gemfile.lock"]
+if [ ! -e "Gemfile.lock"]
   echo "Failed to generate Gemfile.lock."
   exit 1
 fi
 
 # build docker image
-dockerImageName="local/$appRepoName"
 docker build -t "$dockerImageName" .
 
 # spinup docker container as service upon new docker image, expose port 80
-docker run -d --name ruby-sinatra -p 80:4567 fen9li/ruby-sinatra ruby helloworld.rb
+containerId=`docker run -d --name "$appRepoName" -p 80:4567 fen9li/ruby-sinatra ruby helloworld.rb`
 
-# test simple sinatra web service
-curl http://localhost
+# report
+echo "Container "$appRepoName" has spinned up succefully."
+echo "Run command 'curl http://localhost' now, and you should see 'Hello World!' message."
+echo "Try browser url 'http://<docker-mother-host-IP-address>', you should also see 'Hello World!' message."
+
+exit 0
+
+
