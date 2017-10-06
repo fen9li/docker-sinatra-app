@@ -35,9 +35,12 @@ echo ""
 echo "#########################"
 echo ""
 echo "Container "$appRepoName" has spinned up succefully."
+echo ""
 echo "To test it, run command 'curl http://localhost' on docker mother host, and should see 'Hello World!' message."
+echo ""
 echo "To test it, enter url 'http://<docker-mother-host-IP-address>' in browser in other host, should also see 'Hello World!' message."
 
+echo ""
 echo "#########################"
 exit 0
 
