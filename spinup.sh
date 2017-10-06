@@ -16,7 +16,7 @@ git clone -b $appRepoBranch $appRepo
 cd "$appRepoName"
 docker run --rm -v "$PWD":/usr/src/app -w /usr/src/app ruby:2.4 bundle install
 
-if [ ! -e "Gemfile.lock"]
+if [ ! -e "Gemfile.lock"]; then
   echo "Failed to generate Gemfile.lock."
   exit 1
 fi
