@@ -28,7 +28,7 @@ echo `pwd`
 docker build -t "$dockerImageName" .
 
 # spinup docker container as service upon new docker image, expose port 80
-containerId=`docker run -d --name "$appRepoName" -p 80:4567 fen9li/ruby-sinatra ruby helloworld.rb`
+containerId=`docker run -d --name "$appRepoName" -p 80:4567 "$dockerImageName" ruby helloworld.rb`
 
 # report
 echo ""
