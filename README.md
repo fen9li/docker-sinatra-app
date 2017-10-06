@@ -109,6 +109,6 @@ Hello World![fli@docker03 docker-sinatra-app]$
 ```
 2. On other Hosts
 > On other hosts who can see docker mother host ip address.
-> Enter 'http://<docker-mother-host-IP-address>' in its browser url bar and should also see 'Hello World!' message. 
+> Enter 'http://[docker-mother-host-IP-address]' in its browser url bar and should also see 'Hello World!' message. 
 
 
