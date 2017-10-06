@@ -3,7 +3,9 @@ source spinup.conf
 appRepoName=`echo "$appRepo" | cut -d'/' -f 5 | cut -d'.' -f 1`
 dockerImageName="local/$appRepoName"
 
-# delete possible legacy docker image
+# delete possible legacy resources
+docker stop "$dockerImageName" 2>/dev/null
+docker rm "$dockerImageName" 2>/dev/null
 docker rmi "$dockerImageName" 2>/dev/null
 
 # get simple-sinatra-app
@@ -29,10 +31,14 @@ docker build -t "$dockerImageName" .
 containerId=`docker run -d --name "$appRepoName" -p 80:4567 fen9li/ruby-sinatra ruby helloworld.rb`
 
 # report
+echo ""
+echo "#########################"
+echo ""
 echo "Container "$appRepoName" has spinned up succefully."
-echo "Run command 'curl http://localhost' now, and you should see 'Hello World!' message."
-echo "Try browser url 'http://<docker-mother-host-IP-address>', you should also see 'Hello World!' message."
+echo "To test it, run command 'curl http://localhost' on docker mother host, and should see 'Hello World!' message."
+echo "To test it, enter url 'http://<docker-mother-host-IP-address>' in browser in other host, should also see 'Hello World!' message."
 
+echo "#########################"
 exit 0
 
 
