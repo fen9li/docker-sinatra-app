@@ -56,24 +56,59 @@ remote: Total 15 (delta 2), reused 10 (delta 1), pack-reused 0
 Unpacking objects: 100% (15/15), done.
  test]$ 
  ```
- 5. Expected files and directories structure
- ```sh
- test]$ pwd
-/.../.../test
- test]$ tree
-.
-└── docker-sinatra-app
-    ├── buildDockerImage.conf
-    ├── buildDockerImage.sh
-    ├── Dockerfile
-    ├── LICENSE
-    └── README.md
 
-1 directory, 5 files
- test]$
+## Change directory, create docker image and spinup docker simple-sinatra-app service
+1. Ensure files and directories as below:
+```sh
+ test]$ cd docker-sinatra-app/
+ docker-sinatra-app]$ tree
+.
+├── Dockerfile
+├── LICENSE
+├── README.md
+├── spinup.conf
+└── spinup.sh
+
+0 directories, 5 files
+ docker-sinatra-app]$
 ```
 
+2. Configure spinup.conf 
+> This is the ruby simple-sinatra-app's GitHub repo and branch.
+> The new docker image will be build to serve this ruby simple-sinatra-app.
+```sh
+ docker-sinatra-app]$ egrep -v '^#|^$' spinup.conf
+appRepo="https://github.com/fen9li/simple-sinatra-app.git"
+appRepoBranch="develop"
+ docker-sinatra-app]$
+```
 
+3. Run spinup.sh
+```sh
+ docker-sinatra-app]$ bash spinup.sh
+... ...
+Successfully built e4b9ea8c191e
+Successfully tagged local/simple-sinatra-app:latest
 
+#########################
+
+Container simple-sinatra-app has spinned up succefully.
+
+To test it, run command 'curl http://localhost' on docker mother host, and should see 'Hello World!' message.
+
+To test it, enter url 'http://<docker-mother-host-IP-address>' in browser in other host, should also see 'Hello World!' message.
+
+#########################
+ docker-sinatra-app]$
+```
+## Test simple-sinatra-app Service 
+1. On Docker Mother Host
+```sh
+ docker-sinatra-app]$ curl http://localhost
+Hello World![fli@docker03 docker-sinatra-app]$
+```
+2. On other Hosts
+> On other hosts who can see docker mother host ip address.
+> Enter 'http://<docker-mother-host-IP-address>' in its browser url bar and should also see 'Hello World!' message. 
 
 
