@@ -6,8 +6,7 @@ dockerImageName="local/$appRepoName"
 # delete possible legacy docker image
 docker rmi "$dockerImageName" 2>/dev/null
 
-# change to workingDir and git clone simple-sintra-app
-cd docker-sinatra-app
+# get simple-sinatra-app
 git clone -b $appRepoBranch $appRepo
 
 # copy Dockerfile next to app Gemfile
