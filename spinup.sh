@@ -1,12 +1,19 @@
 #!/bin/bash
 source spinup.conf
 appRepoName=`echo "$appRepo" | cut -d'/' -f 5 | cut -d'.' -f 1`
+echo $appRepoName
+
+# change dockerImageName to dockerhub user name
+# if the docker image needs to push dockerhub later 
+# dockerImageName="fen9li/$appRepoName"
 dockerImageName="local/$appRepoName"
+echo $dockerImageName
 
 # delete possible legacy resources
-docker stop "$dockerImageName" 2>/dev/null
-docker rm "$dockerImageName" 2>/dev/null
-docker rmi "$dockerImageName" 2>/dev/null
+docker stop "$appRepoName" # 2>/dev/null
+docker rm "$appRepoName" # 2>/dev/null
+docker rmi "$dockerImageName" # 2>/dev/null
+\rm -Rf "./$appRepoName" # 2>/dev/null
 
 # get simple-sinatra-app
 git clone -b $appRepoBranch $appRepo

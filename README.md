@@ -1,3 +1,6 @@
+## Introduction
+This project implements a solution to spin up a simple sinatra 'Hello World!' web server on a Linux host (physical or virtual). The web page is served via docker container on TCP port 80. The sinatra web app is kept in GitHub. The new docker image can push to Docker Hub. 
+
 ## Base Docker Image
 - [ruby:2.4-onbuild](https://hub.docker.com/_/ruby/)
 ## Installation
@@ -75,7 +78,7 @@ Unpacking objects: 100% (15/15), done.
 
 2. Configure spinup.conf 
 > This is the ruby simple-sinatra-app's GitHub repo and branch.
-> The new docker image will be build to serve this ruby simple-sinatra-app.
+> The new docker image will build to serve this ruby simple-sinatra-app.
 ```sh
  docker-sinatra-app]$ egrep -v '^#|^$' spinup.conf
 appRepo="https://github.com/fen9li/simple-sinatra-app.git"
@@ -109,6 +112,22 @@ Hello World![fli@docker03 docker-sinatra-app]$
 ```
 2. On other Hosts
 > On other hosts who can see docker mother host ip address.
-> Enter 'http://[docker-mother-host-IP-address]' in its browser url bar and should also see 'Hello World!' message. 
+> Enter 'http://<docker-mother-host-IP-address>' in its browser url bar and should also see 'Hello World!' message. 
 
+## Frequently Asked Questions (FAQ)
+### How to push the new docker image to Docker Hub?
+1. Update dockerImageName="fen9li/$appRepoName" in spinup.sh 
+```sh
+# change dockerImageName to dockerhub user name
+# if the docker image needs to push dockerhub later
+# dockerImageName="fen9li/$appRepoName"
+dockerImageName="local/$appRepoName"
+```
+2. Run spinup.sh. 
+3. Run command 'docker images' to ensure the new image is ready.
+4. Push new image to Docker Hub.
 
+### Can't browse simple sinatra app web page from other hosts
+1. Ensure can visit web page from local host.
+2. Check firewall settings.
+3. check other settings outside local host.
