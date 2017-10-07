@@ -90,7 +90,7 @@ appRepoBranch="develop"
 ```sh
  docker-sinatra-app]$ bash spinup.sh
 ... ...
-Successfully built e4b9ea8c191e
+Successfully built d59df99a73fa
 Successfully tagged local/simple-sinatra-app:latest
 
 #########################
@@ -99,20 +99,20 @@ Container simple-sinatra-app has spinned up succefully.
 
 To test it, run command 'curl http://localhost' on docker mother host, and should see 'Hello World!' message.
 
-To test it, enter url 'http://<docker-mother-host-IP-address>' in browser in other host, should also see 'Hello World!' message.
+To test it, enter 'http://<docker-mother-host-IP-address>' in browser url bar from other hosts, should also see 'Hello World!' message.
 
 #########################
  docker-sinatra-app]$
 ```
 ## Test simple-sinatra-app Service 
-1. On Docker Mother Host
+1. On docker mother host
 ```sh
  docker-sinatra-app]$ curl http://localhost
 Hello World![xxx@xxxxxxxx docker-sinatra-app]$
 ```
-2. On other Hosts
+2. On other hosts
 > On other hosts who can see docker mother host ip address.
-> Enter 'http://<docker-mother-host-IP-address>' in its browser url bar and should also see 'Hello World!' message. 
+> Enter 'http://[docker-mother-host-IP-address]' in its browser url bar and should also see 'Hello World!' message. 
 
 ## Frequently Asked Questions (FAQ)
 ### How to push the new docker image to Docker Hub?
@@ -129,5 +129,5 @@ dockerImageName="local/$appRepoName"
 
 ### Can't browse simple sinatra app web page from other hosts
 1. Ensure can visit web page from local host.
-2. Check firewall settings.
+2. Ensure 'http' service added to docker mother host firewall rule.
 3. check other settings outside local host.
