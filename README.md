@@ -108,7 +108,7 @@ To test it, enter url 'http://<docker-mother-host-IP-address>' in browser in oth
 1. On Docker Mother Host
 ```sh
  docker-sinatra-app]$ curl http://localhost
-Hello World![fli@docker03 docker-sinatra-app]$
+Hello World![xxx@xxxxxxxx docker-sinatra-app]$
 ```
 2. On other Hosts
 > On other hosts who can see docker mother host ip address.
